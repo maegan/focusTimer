@@ -6,13 +6,14 @@ import {
   Platform,
   StatusBar,
 } from "react-native";
+import { Focus } from "./src/features/Focus";
 
 import { colors } from "./src/utils/colors";
 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.text}>HI there</Text>
+      <Focus />
     </SafeAreaView>
   );
 }
