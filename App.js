@@ -1,5 +1,7 @@
+import React, { useState } from "react";
 //import { StatusBar } from "expo-status-bar";
 import {
+  View,
   StyleSheet,
   Text,
   SafeAreaView,
@@ -7,13 +9,21 @@ import {
   StatusBar,
 } from "react-native";
 import { Focus } from "./src/features/Focus";
-
 import { colors } from "./src/utils/colors";
 
 export default function App() {
+  const [currentSubject, setCurrentSubject] = useState(null);
   return (
     <SafeAreaView style={styles.container}>
-      <Focus />
+      {!currentSubject ? (
+        <Focus addSubject={setCurrentSubject} />
+      ) : (
+        <View>
+          <Text style={styles.text}>
+            I am going to render the timer for {currentSubject}
+          </Text>
+        </View>
+      )}
     </SafeAreaView>
   );
 }
