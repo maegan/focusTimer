@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { Focus } from "./src/features/Focus";
 import { colors } from "./src/utils/colors";
+import { Timer } from "./src/features/Timer";
 
 export default function App() {
   const [currentSubject, setCurrentSubject] = useState(null);
@@ -18,11 +19,11 @@ export default function App() {
       {!currentSubject ? (
         <Focus addSubject={setCurrentSubject} />
       ) : (
-        <View>
-          <Text style={styles.text}>
-            I am going to render the timer for {currentSubject}
-          </Text>
-        </View>
+        <Timer
+          focusSubject={currentSubject}
+          onTimerEnd={() => {}}
+          clearSubject={() => {}}
+        />
       )}
     </SafeAreaView>
   );
