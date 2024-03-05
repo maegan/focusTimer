@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { TextInput } from "react-native-paper";
 import { colors } from "../utils/colors";
+import { spacing, fontSizes } from "../utils/sizes";
 import { RoundedButton } from "../components/RoundedButton";
 
 export const Focus = ({ addSubject }) => {
   const [subject, setSubject] = useState(null);
-  console.log(subject);
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
@@ -34,14 +34,14 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flexDirection: "row",
-    padding: 25,
+    padding: spacing.lg,
   },
   text: {
     color: colors.offWhite,
-    fontSize: 20,
+    fontSize: fontSizes.lg,
   },
   textInput: {
     flex: 1,
-    marginRight: 10,
+    marginRight: spacing.lg,
   },
 });
