@@ -17,7 +17,7 @@ const PATTERN = [
   1 * ONE_SECOND_IN_MS,
 ];
 
-export const Timer = ({ focusSubject }) => {
+export const Timer = ({ focusSubject, clearSubject }) => {
   const [isStarted, setIsStarted] = useState(false);
   const [progress, setProgress] = useState(1);
   const [minutes, setMinutes] = useState(0.1);
@@ -45,6 +45,9 @@ export const Timer = ({ focusSubject }) => {
           color={colors.sienaGold}
         />
       </View>
+      <View style={styles.timingWrapper}>
+        <Timing onChangeTime={setMinutes} />
+      </View>
       <View style={styles.buttonWrapper}>
         {!isStarted && (
           <RoundedButton title="start" onPress={() => setIsStarted(true)} />
@@ -53,8 +56,8 @@ export const Timer = ({ focusSubject }) => {
           <RoundedButton title="pause" onPress={() => setIsStarted(false)} />
         )}
       </View>
-      <View style={styles.buttonWrapper}>
-        <Timing onChangeTime={setMinutes} />
+      <View style={styles.clearSubjectWrapper}>
+        <RoundedButton size={50} title="-" onPress={clearSubject} />
       </View>
     </View>
   );
@@ -70,10 +73,15 @@ const styles = StyleSheet.create({
     flex: 0.5,
     alignItems: "center",
   },
-  buttonWrapper: {
-    flex: 0.4,
+  timingWrapper: {
+    flex: 0.1,
+    paddingTop: spacing.xl,
     flexDirection: "row",
-    padding: 15,
+  },
+  buttonWrapper: {
+    flex: 0.3,
+    flexDirection: "row",
+    padding: spacing.md,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -85,5 +93,9 @@ const styles = StyleSheet.create({
   task: {
     color: colors.offWhite,
     textAlign: "center",
+  },
+  clearSubjectWrapper: {
+    flexDirection: "row",
+    justifyContent: "center",
   },
 });
