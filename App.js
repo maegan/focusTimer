@@ -11,17 +11,25 @@ import {
 import { Focus } from "./src/features/Focus";
 import { colors } from "./src/utils/colors";
 import { Timer } from "./src/features/Timer";
+import { FocusHistory } from "./src/features/FocusHistory";
 
 export default function App() {
   const [currentSubject, setCurrentSubject] = useState(null);
+  const [history, setHistory] = useState([]);
+
   return (
     <SafeAreaView style={styles.container}>
       {!currentSubject ? (
-        <Focus addSubject={setCurrentSubject} />
+        <>
+          <Focus addSubject={setCurrentSubject} />
+          <FocusHistory history={history} />
+        </>
       ) : (
         <Timer
           focusSubject={currentSubject}
-          onTimerEnd={() => {}}
+          onTimerEnd={(subject) => {
+            setHistory([...history, subject]);
+          }}
           clearSubject={() => setCurrentSubject(null)}
         />
       )}
