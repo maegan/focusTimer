@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 0.15,
     alignItems: "center",
-    backgroundColor: "purple",
   },
   inputContainer: {
     flexDirection: "row",
