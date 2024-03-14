@@ -19,6 +19,7 @@ export const Countdown = ({ minutes = 0.1, isPaused, onProgress, onEnd }) => {
       if (time === 0) {
         clearInterval(interval.current);
         onEnd(reset);
+        time = millis;
         return time;
       }
       const timeLeft = time - 1000;
