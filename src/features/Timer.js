@@ -6,6 +6,7 @@ import { colors } from "../utils/colors";
 import { spacing, fontSizes } from "../utils/sizes.js";
 import { RoundedButton } from "../components/RoundedButton";
 import { Timing } from "../features/Timing";
+import { useKeepAwake } from "expo-keep-awake";
 
 const ONE_SECOND_IN_MS = 1000;
 
@@ -18,9 +19,17 @@ const PATTERN = [
 ];
 
 export const Timer = ({ focusSubject, clearSubject }) => {
+  useKeepAwake();
   const [progress, setProgress] = useState(1);
   const [isStarted, setIsStarted] = useState(false);
-  const [minutes, setMinutes] = useState(0.2);
+  const [minutes, setMinutes] = useState(0.1);
+
+  const onEnd = (reset) => {
+    Vibration.vibrate(PATTERN);
+    setIsStarted(false);
+    setProgress(1);
+    reset();
+  };
   return (
     <View style={styles.container}>
       <View style={styles.countdown}>
@@ -28,9 +37,7 @@ export const Timer = ({ focusSubject, clearSubject }) => {
           minutes={minutes}
           isPaused={!isStarted}
           onProgress={setProgress}
-          onEnd={() => {
-            Vibration.vibrate(PATTERN);
-          }}
+          onEnd={onEnd}
         />
       </View>
       <Text style={styles.title}>Focus Feature: </Text>
